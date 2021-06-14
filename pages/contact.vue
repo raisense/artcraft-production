@@ -72,31 +72,37 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  useStatic,
-  useMeta,
-  useContext,
-  computed
-} from "@nuxtjs/composition-api";
+import { defineComponent, useMeta } from "@nuxtjs/composition-api";
+import { resolveLang } from "~/utils/lang";
 
 export default defineComponent({
-  head: {},
+  head() {
+    return {
+      title: this.$t("navbar.contact")
+    };
+  },
   setup() {
-    const { $prismic } = useContext();
-
-    const document = useStatic(() =>
-      $prismic.api.query($prismic.predicates.at("document.type", "contact"))
-    );
-
-    const fields = computed(() => document.value.results[0].data);
-
     const generateMapLink = ({ longitude, latitude }) =>
       `http://www.google.com/maps/place/${latitude},${longitude}`;
 
-    useMeta(() => ({ title: "Контакты" }));
+    return { generateMapLink };
+  },
+  async asyncData({ $prismic, i18n, params, store, error }) {
+    const lang = resolveLang(i18n.locale);
 
-    return { document, fields, generateMapLink };
+    const document = await $prismic.api.query(
+      $prismic.predicates.at("document.type", "contact"),
+      { lang }
+    );
+
+    if (document) {
+      // store.commit("SET_ALTERNATE_LANGS", document.alternate_languages);
+      const fields = document.results[0].data;
+
+      return { document, fields };
+    } else {
+      error({ statusCode: 404, message: "Page not found" });
+    }
   }
 });
 </script>

@@ -58,6 +58,13 @@
         />
       </Container>
     </template>
+    <nuxt-link
+      class="more-btn my-20 text-center block text-3xl"
+      :to="localePath('/projects')"
+    >
+      {{ $t("Other projects") }}
+      <svg-icon class="inline-block" icon="chevron-right" />
+    </nuxt-link>
   </div>
 </template>
 
@@ -66,10 +73,19 @@ import { defineComponent } from "@nuxtjs/composition-api";
 
 import { resolveLang } from "~/utils/lang";
 
-let alternate_l;
-
 export default defineComponent({
-  head: {},
+  head() {
+    return {
+      title: this.$prismic.asText(this.document.data.title),
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.$prismic.asText(this.document.data.excerpt)
+        }
+      ]
+    };
+  },
   layout: "project",
   setup() {},
   async asyncData({ $prismic, i18n, params, store, error }) {
@@ -88,15 +104,14 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.$i18n.onBeforeLanguageSwitch = (oldLocale, newLocale) => {
-      const lang = resolveLang(newLocale);
-      const otherLang = this.$store.state.alternate_langs.find(
-        t => t.lang === lang
-      );
-      const uid = otherLang ? otherLang.uid : this.$route.params.id;
-
-      this.$router.push(this.localePath(`/projects/${uid}`));
-    };
+    // this.$i18n.onBeforeLanguageSwitch = (oldLocale, newLocale) => {
+    //   const lang = resolveLang(newLocale);
+    //   const otherLang = this.$store.state.alternate_langs.find(
+    //     t => t.lang === lang
+    //   );
+    //   const uid = otherLang ? otherLang.uid : this.$route.params.id;
+    //   this.$router.push(this.localePath(`/projects/${uid}`));
+    // };
   }
 });
 </script>
@@ -127,5 +142,12 @@ export default defineComponent({
 
 .featured-image .scroll-icon {
   @apply w-full flex justify-center absolute bottom-4;
+}
+
+.more-btn .icon {
+  transition: all ease-in-out 0.12s;
+}
+.more-btn:hover .icon {
+  transform: translateX(15px);
 }
 </style>

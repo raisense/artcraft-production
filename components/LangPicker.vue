@@ -1,7 +1,8 @@
 <template>
   <div class="inline-block">
     <select
-      class="lang-picker-select text-black font-bold"
+      id="lang-picker"
+      class="lang-picker-select text-sm md:text-xl"
       v-model="selectedLang"
     >
       <option v-for="lang in languages" :value="lang.id" :key="lang.id">
@@ -52,4 +53,15 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.lang-picker-select {
+  background: transparent;
+  color: #fff;
+  @apply relative px-2 text-white font-semibold;
+}
+
+.lang-picker-select option {
+  background: #000000;
+  color: #fff;
+}
+</style>

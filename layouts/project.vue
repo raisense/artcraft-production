@@ -2,6 +2,6 @@
   <App>
     <Navbar />
     <Nuxt />
-    <Footer />
+    <Footer class="pt-5 md:pt-10" />
   </App>
 </template>

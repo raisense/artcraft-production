@@ -1,6 +1,9 @@
 <template>
   <div>
-    <prismic-rich-text class="text-5xl font-bold mb-20" :field="title" />
+    <prismic-rich-text
+      class="text-4xl md:text-6xl font-bold mb-10 md:mb-20 "
+      :field="title"
+    />
 
     <div>
       <div
@@ -18,7 +21,7 @@
         />
 
         <div class="my-20">
-          <h3 class="text-2xl mb-4 font-semibold">Примеры работ</h3>
+          <h3 class="text-2xl mb-4 font-semibold">{{ $t("Work examples") }}</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             <figure
               class="aspect-w-4 aspect-h-3"
@@ -38,30 +41,32 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  useStatic,
-  useMeta,
-  useContext,
-  computed
-} from "@nuxtjs/composition-api";
+import { defineComponent } from "@nuxtjs/composition-api";
+import { resolveLang } from "~/utils/lang";
 
 export default defineComponent({
-  head: {},
-  setup() {
-    const { $prismic } = useContext();
+  head() {
+    return [
+      {
+        title: this.$prismic.asText(this.title)
+      }
+    ];
+  },
+  async asyncData({ $prismic, i18n, params, store, error }) {
+    const lang = resolveLang(i18n.locale);
 
-    const document = useStatic(() =>
-      $prismic.api.query(
-        $prismic.predicates.at("document.type", "our-services")
-      )
+    const document = await $prismic.api.query(
+      $prismic.predicates.at("document.type", "our-services"),
+      { lang }
     );
 
-    const title = computed(() => document.value.results[0].data.page_title);
+    if (document) {
+      const title = document.results[0].data.page_title;
 
-    useMeta(() => ({ title: $prismic.asText(title.value) }));
-
-    return { document, title };
+      return { document, title };
+    } else {
+      error({ statusCode: 404, message: "Page not found" });
+    }
   }
 });
 </script>
@@ -71,16 +76,16 @@ export default defineComponent({
   content: "";
   height: 2px;
 
-  @apply bg-white top-5 left-0 absolute w-full;
+  @apply bg-white top-4 md:top-5 left-0 absolute w-full;
 }
 
 .service-title {
-  @apply mb-20 relative text-center text-4xl font-medium;
+  @apply mb-10 md:mb-20 relative text-center text-2xl md:text-4xl font-medium;
 }
 
 .service-title h2 {
   width: fit-content;
 
-  @apply px-16 relative z-20 bg-black mx-auto;
+  @apply px-5 md:px-16 relative z-20 bg-black mx-auto;
 }
 </style>

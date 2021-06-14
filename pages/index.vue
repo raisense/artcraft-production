@@ -3,16 +3,18 @@
     <Navbar />
     <div class="hero-wrapper container h-full mx-auto">
       <div class="flex justify-between items-center h-full">
-        <div class="text-center mx-auto">
-          <h1 class="block text-6xl mb-16 font-bold">
-            <prismic-rich-text :field="document.results[0].data.headline" />
-          </h1>
-          <nuxt-link
-            tag="button"
-            to="/projects"
-            class="font-bold bg-white text-black py-6 px-16"
-          >
-            проекты
+        <div class="mb-16 xs:mb-0 text-center mx-auto">
+          <prismic-rich-text
+            class="block px-5 md:px-0 text-4xl md:text-6xl mb-5 sm:mb-10 font-bold"
+            :field="document.results[0].data.headline"
+          />
+
+          <nuxt-link :to="localePath('/projects')" class="">
+            <button
+              class="border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white text-black py-4 xs:py-6 px-16"
+            >
+              {{ $t("navbar.projects") }}
+            </button>
           </nuxt-link>
         </div>
       </div>
@@ -21,12 +23,21 @@
 </template>
 
 <script>
+import { resolveLang } from "~/utils/lang";
+
 export default {
   layout: "homepage",
+  head() {
+    return {
+      title: this.$t("Homepage")
+    };
+  },
+  async asyncData({ $prismic, i18n, error }) {
+    const lang = resolveLang(i18n.locale);
 
-  async asyncData({ $prismic, params, error }) {
     const document = await $prismic.api.query(
-      $prismic.predicates.at("document.type", "homepage")
+      $prismic.predicates.at("document.type", "homepage"),
+      { lang }
     );
 
     if (document) {

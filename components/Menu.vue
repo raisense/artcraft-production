@@ -49,7 +49,7 @@ export default defineComponent({
 .menu-trigger {
   position: relative;
   z-index: 100;
-  @apply ml-4;
+  @apply ml-4 md:ml-8;
   width: 48px;
   height: 48px;
 }

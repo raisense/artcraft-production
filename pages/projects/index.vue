@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h1 class="text-6xl text-center font-bold mb-16">
-      Проекты
+    <h1 class="text-4xl md:text-6xl text-center font-bold mb-16">
+      {{ $t("navbar.projects") }}
     </h1>
 
-    <div class="grid grid-cols-2 gap-5">
+    <div class="grid gird-cols-1 md:grid-cols-2 gap-5">
       <nuxt-link
         class="project-card"
         v-for="project in document.results"
         :key="project.id"
         :to="localePath(`/projects/${project.uid}`)"
       >
-        <figure class="aspect-w-4 aspect-h-3">
+        <figure class="aspect-w-4 aspect-h-4 md:aspect-h-3">
           <prismic-image
             class="object-cover"
             :field="project.data.featured_image"
@@ -30,6 +30,12 @@
 import { resolveLang } from "~/utils/lang";
 
 export default {
+  head() {
+    return {
+      title: this.$t("navbar.projects")
+    };
+  },
+
   async asyncData({ $prismic, i18n, params, error }) {
     const lang = resolveLang(i18n.locale);
 
@@ -70,7 +76,7 @@ export default {
     rgba(0, 0, 0, 0.7) 100%
   );
 
-  @apply p-6 opacity-0 flex flex-col justify-end;
+  @apply p-6 opacity-100 md:opacity-0 flex flex-col justify-end;
 }
 
 .project-card .title {

@@ -4,7 +4,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "artcraft-design",
+    titleTemplate: "%s - " + "Aircraft Design",
+    title: "Aircraft Design" || "",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -60,17 +61,22 @@ export default {
             projects: "Projects",
             clients: "Clients",
             services: "Services",
-            contact: "Contact Us"
+            contact: "Contacts"
           },
+          Homepage: "Homepage",
           "Social links": "Social networks",
           "Contact us": "Contact us",
-          Send: "Отправить",
+          Send: "Send",
           "First name": "First name",
           "E-mail": "E-mail",
           "Phone number": "Your phone number",
           "Your message": "Your message here",
           Year: "Year",
-          Website: "Website"
+          Website: "Website",
+          "Our Services": "Our Services",
+          "Work examples": "Work examples",
+          Copyright: "All rights reserved",
+          "Other projects": "other projects"
         },
         ru: {
           navbar: {
@@ -79,6 +85,7 @@ export default {
             services: "Услуги",
             contact: "Контакты"
           },
+          Homepage: "Главная страница",
           "Social links": "Социальные сети",
           "Contact us": "Напишите нам",
           Send: "Отправить",
@@ -87,7 +94,11 @@ export default {
           "Phone number": "Ваш номер телефона",
           "Your message": "Ваше сообщение",
           Year: "Год",
-          Website: "Веб-сайт"
+          Website: "Веб-сайт",
+          "Our Services": "Наши услуги",
+          "Work examples": "Примеры работ",
+          Copyright: "Все права защищены",
+          "Other projects": "другие работы"
         },
         uz: {
           navbar: {
@@ -96,6 +107,7 @@ export default {
             services: "Xizmatlar",
             contact: "Aloqa"
           },
+          Homepage: "Bosh sahifa",
           "Social links": "Biz ijtimoiy tarmoqlardamiz",
           "Contact us": "Biz bilan bogʻlaning",
           Send: "Joʻnatish",
@@ -104,7 +116,11 @@ export default {
           "Phone number": "Telefon raqamingiz",
           "Your message": "Xabarni kiriting",
           Year: "Yil",
-          Website: "Veb-sayt"
+          Website: "Veb-sayt",
+          "Our Services": "Bizning xizmatlar",
+          "Work examples": "Ishdan namunalar",
+          Copyright: "Barcha huquqlar himoyalangan",
+          "Other projects": "boshqa loyihalar"
         }
       }
     }
