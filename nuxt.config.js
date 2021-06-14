@@ -4,8 +4,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - " + "Aircraft Design",
-    title: "Aircraft Design" || "",
+    titleTemplate: "%s - " + "ArtCraft Production",
+    title: "ArtCraft Production" || "",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
