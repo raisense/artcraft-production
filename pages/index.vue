@@ -11,7 +11,7 @@
 
           <nuxt-link :to="localePath('/projects')" class="">
             <button
-              class="border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white text-black py-4 xs:py-6 px-16"
+              class="border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white focus:text-black py-4 xs:py-6 px-16"
             >
               {{ $t("navbar.projects") }}
             </button>
