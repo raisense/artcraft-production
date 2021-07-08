@@ -1,7 +1,10 @@
 <template>
   <div class="home-screen w-screen h-screen bg-no-repeat bg-cover">
+    <div class="bg-video">
+      <video  src="/background-video.m4v" autoplay loop></video>
+    </div>
     <Navbar />
-    <div class="hero-wrapper container h-full mx-auto">
+    <div class="hero-wrapper relative z-10 container h-full mx-auto">
       <div class="flex justify-between items-center h-full">
         <div class="mb-16 xs:mb-0 text-center mx-auto">
           <prismic-rich-text
@@ -55,9 +58,33 @@ export default {
 @apply min-h-screen flex justify-center items-center text-center mx-auto;
 }
 */
-.home-screen {
+/* .home-screen {
   background-image: url("/home.jpg");
+} */
+
+.bg-video{
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
+
+.bg-video video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bg-video:after{
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.5);
+}
+  
 
 .hero-wrapper {
   height: calc(100% - 88px - 118px);
