@@ -6,6 +6,12 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  created() {
+    this.$store.dispatch("getSocialLinks");
+  }
+};
+</script>
 
 <style></style>
