@@ -2,7 +2,7 @@
   <div class="home-screen w-screen h-screen bg-no-repeat bg-cover">
     <div class="bg-video">
       <video
-        src="/background-video.m4v"
+        src="/background-video.mp4"
         playsinline
         autoplay
         muted
