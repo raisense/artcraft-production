@@ -7,7 +7,7 @@
     <div class="grid gird-cols-1 md:grid-cols-2 gap-5">
       <nuxt-link
         class="project-card"
-        v-for="project in document.results"
+        v-for="project in sortedProjects"
         :key="project.id"
         :to="localePath(`/projects/${project.uid}`)"
       >
@@ -36,13 +36,28 @@ export default {
     };
   },
 
-  async asyncData({ $prismic, i18n, params, error }) {
+  computed: {
+    sortedProjects() {
+      const byOrder = (a, b) => {
+        if (a.data.order === b.data.order) return 0;
+        else if (a.data.order === null) return 1;
+        else if (b.data.order === null) return -1;
+
+        return a < b ? -1 : 1;
+      };
+
+      return this.document.results.sort(byOrder);
+    }
+  },
+
+  async asyncData({ $prismic, i18n, error }) {
     const lang = resolveLang(i18n.locale);
 
     const document = await $prismic.api.query(
       $prismic.predicates.at("document.type", "projects"),
       {
-        lang: lang
+        lang: lang,
+        orderings: "[document.last_publication_date]"
       }
     );
 
