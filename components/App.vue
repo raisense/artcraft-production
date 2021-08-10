@@ -30,9 +30,11 @@ export default {
   },
   mounted() {
     this.checkAppHeight();
+
+    window.addEventListener("resize", this.checkAppHeight);
   },
-  updated() {
-    // this.checkAppHeight();
+  beforeDestroy() {
+    window.removeEventListener("resize", this.checkAppHeight);
   }
 };
 </script>
