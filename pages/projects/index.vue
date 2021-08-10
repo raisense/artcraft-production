@@ -14,7 +14,7 @@
         <figure class="aspect-w-4 aspect-h-4 md:aspect-h-3">
           <prismic-image
             class="object-cover"
-            :field="project.data.featured_image"
+            :field="project.data.cover_image"
           />
         </figure>
         <div class="card-overlay">
