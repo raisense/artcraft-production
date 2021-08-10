@@ -37,7 +37,10 @@ export default {
         return "#";
       }
 
-      const parsed = psl.parse(link.replace(/(^\w+:|^)\/\//, ""));
+      const parsed = psl.parse(new URL(link).hostname);
+
+      console.log(parsed);
+
       return parsed.sld;
     }
   }
