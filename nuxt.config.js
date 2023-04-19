@@ -77,7 +77,9 @@ export default {
           "Our Services": "Our Services",
           "Work examples": "Work examples",
           Copyright: "All rights reserved",
-          "Other projects": "other projects"
+          "Other projects": "other projects",
+          Next: "Next",
+          Prev: "Prev"
         },
         ru: {
           navbar: {
@@ -99,7 +101,9 @@ export default {
           "Our Services": "Наши услуги",
           "Work examples": "Примеры работ",
           Copyright: "Все права защищены",
-          "Other projects": "другие работы"
+          "Other projects": "другие работы",
+          Next: "Следующий",
+          Prev: "Предыдущий"
         },
         uz: {
           navbar: {
@@ -121,7 +125,9 @@ export default {
           "Our Services": "Bizning xizmatlar",
           "Work examples": "Ishdan namunalar",
           Copyright: "Barcha huquqlar himoyalangan",
-          "Other projects": "boshqa loyihalar"
+          "Other projects": "boshqa loyihalar",
+          Next: "Keyingilari",
+          Prev: "Oldingilari"
         }
       }
     }

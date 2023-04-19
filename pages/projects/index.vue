@@ -23,6 +23,22 @@
         </div>
       </nuxt-link>
     </div>
+    <div class="flex justify-between items-center my-10">
+      <button
+        v-if="document.prev_page"
+        @click="handlePrev"
+        class="border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white focus:text-black py-4 xs:py-6 px-16"
+      >
+        {{ $t("Prev") }}
+      </button>
+      <button
+        @click="handleNext"
+        v-if="document.next_page"
+        class="border border-2 bg-transparent text-white font-bold focus:text-black hover:text-black transition-all hover:bg-white focus:bg-white focus:text-black py-4 xs:py-6 px-16"
+      >
+        {{ $t("Next") }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -50,12 +66,23 @@ export default {
     }
   },
 
-  async asyncData({ $prismic, i18n, error }) {
+  methods: {
+    handlePrev() {
+      this.$router.push(`/projects?page=${this.document.page - 1}`);
+    },
+    handleNext() {
+      this.$router.push(`/projects?page=${this.document.page + 1}`);
+    }
+  },
+
+  async asyncData({ $prismic, i18n, error, query, ...params }) {
     const lang = resolveLang(i18n.locale);
 
     const document = await $prismic.api.query(
       $prismic.predicates.at("document.type", "projects"),
       {
+        pageSize: 30,
+        page: query.page ? query.page : 1,
         lang: lang,
         orderings: "[document.last_publication_date]"
       }
@@ -65,6 +92,21 @@ export default {
       return { document };
     } else {
       error({ statusCode: 404, message: "Page not found" });
+    }
+  },
+  watch: {
+    "$route.query": {
+      handler: function(to, from) {
+        if (to.page && to.page !== from.page) {
+          this.$nuxt.refresh();
+
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          });
+        }
+      }
     }
   }
 };
