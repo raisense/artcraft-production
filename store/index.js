@@ -23,7 +23,7 @@ export const mutations = {
 
 export const actions = {
   async getSocialLinks({ commit }) {
-    const locale = $nuxt.$i18n.locale;
+    const locale = this.$i18n.locale;
     const lang = resolveLang(locale);
 
     const document = await this.$prismic.api.query(

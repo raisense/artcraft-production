@@ -52,10 +52,10 @@ export default {
 
   i18n: {
     locales: ["en", "ru", "uz"],
-    defaultLocale: "ru",
+    defaultLocale: "en",
     detectBrowserLanguage: false,
     vueI18n: {
-      fallbackLocale: "uz",
+      fallbackLocale: "ru",
       messages: {
         en: {
           navbar: {

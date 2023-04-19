@@ -4,7 +4,6 @@
       <img src="~/assets/icons/logo.svg" />
     </nuxt-link>
     <div>
-      <LangPicker />
       <Menu />
     </div>
   </div>
